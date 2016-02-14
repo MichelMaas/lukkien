@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.maas_fam.lukkien;
+package nl.maas_fam.lukkien.data;
+
+import java.io.Serializable;
+import lombok.Getter;
 
 /**
  *
  * @author michel
  */
-public class HTMLController {
-    
+@Getter
+public class ItWorks implements Serializable {
+
+    private String itWorks = "It Works!!";
+
 }

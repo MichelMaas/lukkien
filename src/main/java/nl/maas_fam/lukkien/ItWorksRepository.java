@@ -5,13 +5,13 @@
  */
 package nl.maas_fam.lukkien;
 
-import org.springframework.stereotype.Repository;
+import nl.maas_fam.lukkien.data.ItWorks;
 
 /**
  *
  * @author michel
  */
-@Repository
-public class ItWorksRepository {
-    
+public interface ItWorksRepository {
+
+    ItWorks getAll();
 }

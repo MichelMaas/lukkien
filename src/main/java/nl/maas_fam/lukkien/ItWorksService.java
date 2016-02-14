@@ -5,6 +5,7 @@
  */
 package nl.maas_fam.lukkien;
 
+import nl.maas_fam.lukkien.data.ItWorks;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,7 +14,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ItWorksService {
-    public String itWorks(){
-        return "It works!!";
+
+    public String itWorks() {
+        return itWorksObject().getItWorks();
+    }
+
+    public ItWorks itWorksObject() {
+        return new ItWorks();
     }
 }

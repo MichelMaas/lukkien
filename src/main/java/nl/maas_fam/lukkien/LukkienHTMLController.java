@@ -5,25 +5,26 @@
  */
 package nl.maas_fam.lukkien;
 
-import nl.maas_fam.lukkien.data.ItWorks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
  * @author michel
  */
-@RestController
-@RequestMapping(value = "/rest")
-public class LukkienRestController {
+@Controller
+@RequestMapping(value = "/")
+public class LukkienHTMLController {
 
     @Autowired
     private ItWorksService itWorksService;
 
-    @RequestMapping(value = "/working", method = RequestMethod.GET, produces = "application/json")
-    public ItWorks restWorking() {
-        return itWorksService.itWorksObject();
+    @RequestMapping(value = "/working")
+    public ModelAndView loadHomePage(Model m) {
+        m.addAttribute("text", itWorksService.itWorks());
+        return new ModelAndView("home");
     }
 }
