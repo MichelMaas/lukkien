@@ -3,18 +3,39 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context.xsd ">
+        http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
     <context:component-scan base-package="nl.maas_fam.lukkien"/>
     <mvc:annotation-driven/>
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/view/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    <jdbc:embedded-database id="dataSource" type="H2" />
+
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:db/sql/create-db.sql" />
+        <jdbc:script location="classpath:db/sql/insert-data.sql" />
+    </jdbc:initialize-database>
+    
+    <bean class="org.springframework.orm.jpa.JpaTransactionManager"
+          id="transactionManager" p:entityManagerFactory-ref="entityManagerFactory" />
+
+    <jdbc:embedded-database id="dataSource" type="DERBY">
+        <jdbc:script location="classpath:com/jroller/blogs/eyallupu/derby/tables.sql"/>
+        <jdbc:script location="classpath:com/jroller/blogs/eyallupu/derby/constraints.sql"/>
+        <jdbc:script location="classpath*:com/jroller/blogs/eyallupu/derby/data*.sql"/>
+    </jdbc:embedded-database>
+
+    <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          id="entityManagerFactory" p:dataSource-ref="dataSource"/>
 </beans> 
  

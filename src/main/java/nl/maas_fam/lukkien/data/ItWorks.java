@@ -6,15 +6,16 @@
 package nl.maas_fam.lukkien.data;
 
 import java.io.Serializable;
-import lombok.Getter;
+import lombok.Data;
 
 /**
  *
  * @author michel
  */
-@Getter
+@Data
 public class ItWorks implements Serializable {
 
-    private String itWorks = "It Works!!";
+    private long id;
+    private String text;
 
 }

@@ -6,6 +6,7 @@
 package nl.maas_fam.lukkien;
 
 import nl.maas_fam.lukkien.data.ItWorks;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,11 +16,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItWorksService {
 
+    @Autowired
+    private ItWorksDaoImpl itWorksDaoImpl;
+
     public String itWorks() {
-        return itWorksObject().getItWorks();
+        return itWorksObject().getText();
     }
 
     public ItWorks itWorksObject() {
-        return new ItWorks();
+        return itWorksDaoImpl.getAll().get(0);
     }
 }

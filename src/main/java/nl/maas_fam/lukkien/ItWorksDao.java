@@ -5,13 +5,16 @@
  */
 package nl.maas_fam.lukkien;
 
+import java.util.List;
 import nl.maas_fam.lukkien.data.ItWorks;
 
 /**
  *
  * @author michel
  */
-public interface ItWorksRepository {
+public interface ItWorksDao {
 
-    ItWorks getAll();
+    List<ItWorks> getAll();
+
+    ItWorks findById(long id);
 }
